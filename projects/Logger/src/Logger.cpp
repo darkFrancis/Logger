@@ -18,7 +18,7 @@
 
 // Macro de simplification d'écriture
 #define logStream reinterpret_cast<QTextStream*>(m_stream)
-#define logFile reinterpret_cast<QFile*>(logStream->device())
+#define logFile reinterpret_cast<QFile*>(m_file)
 
 Logger* Logger::m_instance = nullptr;
 
@@ -34,6 +34,8 @@ Logger::Logger()
     }
     m_lvl = Debug; // Log tout par défaut
     m_instance = this;
+    m_stream = nullptr;
+    m_file = nullptr;
 }
 
 /**
@@ -86,10 +88,10 @@ bool Logger::createLog(const QString& file, int rotation)
         }
     }
 
-    QFile* f = new QFile(QFileInfo(file).absoluteFilePath());
-    if(f->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
+    m_file = new QFile(QFileInfo(file).absoluteFilePath());
+    if(logFile->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
     {
-        m_stream = new QTextStream(f);
+        m_stream = new QTextStream(logFile);
         logStream->setCodec("UTF-8");
         return true;
     }
@@ -102,12 +104,11 @@ bool Logger::createLog(const QString& file, int rotation)
  */
 void Logger::closeLog()
 {
-    QFile* f = logFile;
-    if(f)
+    if(logFile)
     {
-        logStream->setDevice(nullptr);
-        f->close();
-        delete f;
+        logFile->close();
+        delete logFile;
+        m_file = nullptr;
     }
     if(logStream)
     {

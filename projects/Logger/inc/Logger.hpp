@@ -8,10 +8,12 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
+    #include <QtCore/qglobal.h>
+
     #if defined(D_BUILD_PROJECTS)
-    #  define LOGGER_EXPORT __declspec(dllexport)
+    #  define LOGGER_EXPORT Q_DECL_EXPORT
     #else
-    #  define LOGGER_EXPORT __declspec(dllimport)
+    #  define LOGGER_EXPORT Q_DECL_IMPORT
     #endif
 
     #include <QString>
@@ -68,6 +70,7 @@
         private:
             static Logger* m_instance;  /**< Instance unique de la classe Logger */
             void* m_stream;             /**< Pointeur vers le flux à utiliser */
+            void* m_file;               /**< Pointeur vers le fichier a utiliser */
             LogLvl m_lvl;               /**< Niveau actuel de log */
     };
 

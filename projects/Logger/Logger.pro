@@ -5,6 +5,9 @@ VERSION= 0.1
 TEMPLATE = lib
 include(../includes/projects.pri)
 
-SOURCES += Logger.cpp
-HEADERS += Logger.hpp \
-    version.hpp
+SOURCES += src/Logger.cpp
+HEADERS += inc/Logger.hpp \
+    inc/version/version.hpp
+
+INCLUDEPATH += inc \
+    inc/version
