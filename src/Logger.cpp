@@ -14,7 +14,7 @@
 #include <QDateTime>
 #include <QDebug>
 
-#include "version.hpp"
+#include "version/version.hpp"
 
 // Useful macros
 #define logStream reinterpret_cast<QTextStream*>(m_stream)
