@@ -4,8 +4,8 @@ project(Logger VERSION 0.1)
 find_package(Qt5Core REQUIRED)
 
 set(SOURCES
-    inc/Logger.hpp
-    inc/version/version.hpp
+    inc/Logger/Logger.hpp
+    src/version.hpp
     src/Logger.cpp)
 add_library(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC inc)

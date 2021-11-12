@@ -5,7 +5,7 @@
  * @copyright 2021 Dark Francis
  * @date 08/04/2021
  */
-#include "Logger.hpp"
+#include "Logger/Logger.hpp"
 
 #include <QFile>
 #include <QTextStream>
@@ -14,7 +14,7 @@
 #include <QDateTime>
 #include <QDebug>
 
-#include "version/version.hpp"
+#include "version.hpp"
 
 // Useful macros
 #define logStream reinterpret_cast<QTextStream*>(m_stream)
