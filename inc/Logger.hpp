@@ -1,6 +1,6 @@
 /**
  * @file Logger.hpp
- * @brief Definition du logger des projets
+ * @brief Logger definition
  * @author Dark Francis
  * @copyright 2021 Dark Francis
  * @date 08/04/2021
@@ -21,28 +21,28 @@
     /**
      * @header_table Logger.hpp @end_table
      * @relatesalso Logger
-     * @brief L'énumération LogLvl défini le niveau de log de référence.
+     * @brief The LogLvl enum defines all log levels.
      *
-     * Ce niveau de log est utilisé de la façon suivante : si le niveau de log
-     * demandé par une fonction est inférieur ou égale à #Logger::m_lvl, le log est
-     * écrit, sinon, le log est ignoré.
+     * The log level is use as follow : if the log level requested by a function
+     * is less than or equal to #Logger::m_lvl, the log is written. The log is
+     * ignored otherwise.
      */
     enum LogLvl : int
     {
-        Debug   = 5, /**< Tout est logué */
-        Info    = 4, /**< Seuls les logs d'info, de warning et d'erreur sont logués */
-        Warning = 3, /**< Seuls les logs de warning et d'erreur sont logués */
-        Error   = 2, /**< Seuls les logs d'erreur sont logués */
-        Fatal   = 1, /**< Seuls les logs d'erreur fatale sont logués */
-        Off     = 0  /**< Rien n'est logué */
+        Debug   = 5, /**< Log everything */
+        Info    = 4, /**< Log only info, warning or errors */
+        Warning = 3, /**< Log only warning or errors */
+        Error   = 2, /**< Log only errors */
+        Fatal   = 1, /**< Log only fatal */
+        Off     = 0  /**< Log nothing */
     };
 
     /**
      * @header_table Logger.hpp @end_table
-     * @brief La classe Logger définie l'instance de log.
+     * @brief The Logger class defines the logger instance.
      *
-     * Un objet de cette classe doit être créé dans la fonction principale pour
-     * pouvoir être utilisé dans le reste du code.
+     * A logger instance should be created in the main function. Then it can be
+     * used everywhere else with the static function Logger::Instance().
      */
     class LOGGER_EXPORT Logger
     {
@@ -68,15 +68,15 @@
             QString rotationFileName(const QString& file, int rotation);
 
         private:
-            static Logger* m_instance;  /**< Instance unique de la classe Logger */
-            void* m_stream;             /**< Pointeur vers le flux à utiliser */
-            void* m_file;               /**< Pointeur vers le fichier a utiliser */
-            LogLvl m_lvl;               /**< Niveau actuel de log */
+            static Logger* m_instance;  /**< Unique instance of Logger */
+            void* m_stream;             /**< Pointer to current stream */
+            void* m_file;               /**< Pointer to current file */
+            LogLvl m_lvl;               /**< Current log level */
     };
 
     /**
      * @relatesalso Logger
-     * Pointeur vers l'instance de la classe Logger.
+     * Pointer to the unique instance of Logger.
      */
     #define qLog Logger::Instance()
 

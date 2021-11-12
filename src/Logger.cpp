@@ -1,6 +1,6 @@
 /**
  * @file Logger.cpp
- * @brief Source du logger des projets
+ * @brief Logger sources
  * @author Dark Francis
  * @copyright 2021 Dark Francis
  * @date 08/04/2021
@@ -16,31 +16,31 @@
 
 #include "version.hpp"
 
-// Macro de simplification d'écriture
+// Useful macros
 #define logStream reinterpret_cast<QTextStream*>(m_stream)
 #define logFile reinterpret_cast<QFile*>(m_file)
 
 Logger* Logger::m_instance = nullptr;
 
 /**
- * Constructeur de la classe Logger.
- * @throw Si une instance de la classe éxiste déjà.
+ * Logger constructor.
+ * @throw std::runtime_error if another Logger instance is already defined.
  */
 Logger::Logger()
 {
     if(m_instance != nullptr)
     {
-        throw "Une instance de Logger éxiste déjà !";
+        throw std::runtime_error("Une instance de Logger éxiste déjà !");
     }
-    m_lvl = Debug; // Log tout par défaut
+    m_lvl = Debug; // Log everything by default
     m_instance = this;
     m_stream = nullptr;
     m_file = nullptr;
 }
 
 /**
- * Destructeur de la classe Logger. @n
- * Ferme le fichier de log en cours.
+ * Logger destructor. @n
+ * Close the logging file.
  */
 Logger::~Logger()
 {
@@ -49,18 +49,18 @@ Logger::~Logger()
 
 /**
  * @fn Logger* Logger::Instance()
- * @return Unique instance créée du logger
+ * @return Unique instance of logger
  */
 
 /**
- * @param file Fichier de log à créé
- * @param rotation Nombre de fichiers de rotation
- * @return @li @b true si le fichier a été ouvert
- *         @li @b false sinon
+ * @param file Log file to create
+ * @param rotation File used for the rotation
+ * @return @li @b true if the file is opened
+ *         @li @b false otherwise
  *
- * Ferme le fichier de log en cours. Si la @p rotation est fixé, supprime
- * le log maximum autorisé et décale tous les fichiers. Ouvre le nouveau
- * fichier de log.
+ * Close the current log file if there is one. If @p rotation is setted,
+ * remove the maximum authorized file and rename other log files to N+1.
+ * Open the new log file.
  * @sa rotationFileName().
  */
 bool Logger::createLog(const QString& file, int rotation)
@@ -100,7 +100,7 @@ bool Logger::createLog(const QString& file, int rotation)
 }
 
 /**
- * Ferme le fichier de log en cours.
+ * Close the current log file.
  */
 void Logger::closeLog()
 {
@@ -118,58 +118,58 @@ void Logger::closeLog()
 }
 
 /**
- * @return Fichier de log courant
+ * @return Current log file
  */
 QString Logger::currentFile() const { return logFile ? logFile->fileName() : ""; }
 
 /**
- * @return Version du logger
+ * @return Logger version
  */
 QString Logger::version() { return _VERSION_; }
 
 /**
  * @fn Logger::setLogLevel(LogLvl lvl)
- * @param lvl Nouveau niveau de log.
+ * @param lvl New log level.
  */
 
 /**
  * @fn void Logger::error(const QString& msg)
- * @param msg Message à loguer en Debug.
+ * @param msg Message to log on Debug.
  * @sa LogLvl, printLog().
  */
 
 /**
  * @fn void Logger::error(const QString& msg)
- * @param msg Message à loguer en Info.
+ * @param msg Message to log on Info.
  * @sa LogLvl, printLog().
  */
 
 /**
  * @fn void Logger::error(const QString& msg)
- * @param msg Message à loguer en Warning.
+ * @param msg Message to log on Warning.
  * @sa LogLvl, printLog().
  */
 
 /**
  * @fn void Logger::error(const QString& msg)
- * @param msg Message à loguer en Error.
+ * @param msg Message to log on Error.
  * @sa LogLvl, printLog().
  */
 
 /**
  * @fn void Logger::fatal(const QString& msg)
- * @param msg Message à loguer en Fatal.
+ * @param msg Message to log on Fatal.
  * @sa LogLvl, printLog().
  */ 
 
 /**
- * @param lvl Niveau de log demandé
- * @param msg Message à loguer
+ * @param lvl Log level requested
+ * @param msg Message to log
  *
- * Ecrit une ligne de log dans le fichier ouvert en cours.@n
- * Ligne de la forme "<timestamp> | <lvl> | <msg>".
- * @note Si le message tiens sur plusieurs lignes, les lignes suivantes
- * sont de la forme "<timestamp> |       | <msg>".
+ * Write a new line in the current log file as follow :@n
+ * "<timestamp> | <lvl> | <msg>".
+ * @note If it's a multiline message, following lines are added :@n
+ * "<timestamp> |       | <msg>".
  */
 void Logger::printLog(LogLvl lvl, const QString& msg)
 {
@@ -198,13 +198,12 @@ void Logger::printLog(LogLvl lvl, const QString& msg)
 }
 
 /**
- * @param file Fichier de base des logs
- * @param rotation Numéro de fichier de rotation
- * @return Nom du fichier avec rotation
+ * @param file Log file base name
+ * @param rotation Rotation number
+ * @return Full log file name
  *
- * Le nom de fichier avec rotation est de la forme @p &lt;file>.&lt;rotation>.&lt;ext>.
- * @note La seul exception à la règle est le fichier de rotation 0 qui est le fichier
- * de log en cours.
+ * Log file with rotation follow the form @p &lt;file>.&lt;rotation>.&lt;ext>.
+ * @note The current log file follow the form @p &lt;file>.&lt;ext>.
  */
 QString Logger::rotationFileName(const QString& file, int rotation)
 {

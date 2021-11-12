@@ -1,3 +1,5 @@
+# Copyright 2021 Dark Francis
+
 QT       += core
 
 TARGET = Logger
