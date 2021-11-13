@@ -26,6 +26,10 @@ class LoggerConan(ConanFile):
         cmake.configure(source_folder="Logger")
         cmake.build()
 
+    def requirements(self):
+        self.requires("CommonQtCMake/0.1@dark/francis")
+
+
     def package(self):
         self.copy("*.h", dst="include", src="Logger/inc")
         self.copy("*.hpp", dst="include", src="Logger/inc")
