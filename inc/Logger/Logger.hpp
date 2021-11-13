@@ -10,7 +10,7 @@
 
     #include <QtCore/qglobal.h>
 
-    #if defined(D_BUILD_PROJECTS)
+    #if defined(_BUILD_LOGGER_LIB)
     #  define LOGGER_EXPORT Q_DECL_EXPORT
     #else
     #  define LOGGER_EXPORT Q_DECL_IMPORT

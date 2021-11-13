@@ -10,7 +10,7 @@
 
     #include <QString>
 
-    const QString _VERSION_ = "0.2"; /*< Library version */
+    const QString _VERSION_ = DEFINED_VERSION; /*< Library version */
 
     /* ======================================================================================================== */
 

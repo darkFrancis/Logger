@@ -2,7 +2,7 @@ from conans import ConanFile, CMake, tools
 
 class LoggerConan(ConanFile):
     name = "Logger"
-    version = "0.2"
+    version = "0.3"
     license = "Copyright Dark Francis 2021"
     author = "Dark Francis dark.francis.dod@gmail.com"
     url = "https://github.com/darkFrancis/Logger"
@@ -22,6 +22,7 @@ class LoggerConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
+        cmake.definitions["DEFINED_VERSION"] = self.version
         cmake.configure(source_folder="Logger")
         cmake.build()
 
@@ -31,7 +32,4 @@ class LoggerConan(ConanFile):
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
-
-    def package_info(self):
-        self.cpp_info.libs = ["logger"]
 
