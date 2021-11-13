@@ -133,19 +133,19 @@ QString Logger::version() { return _VERSION_; }
  */
 
 /**
- * @fn void Logger::error(const QString& msg)
+ * @fn void Logger::debug(const QString& msg)
  * @param msg Message to log on Debug.
  * @sa LogLvl, printLog().
  */
 
 /**
- * @fn void Logger::error(const QString& msg)
+ * @fn void Logger::info(const QString& msg)
  * @param msg Message to log on Info.
  * @sa LogLvl, printLog().
  */
 
 /**
- * @fn void Logger::error(const QString& msg)
+ * @fn void Logger::warning(const QString& msg)
  * @param msg Message to log on Warning.
  * @sa LogLvl, printLog().
  */
