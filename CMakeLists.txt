@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.21.2)
-project(Logger VERSION 0.3)
+project(Logger VERSION 0.4)
 
-if(NOT EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-    execute_process(COMMAND conan install ${CMAKE_SOURCE_DIR} --build=missing)
-endif()
+execute_process(COMMAND conan install ${CMAKE_SOURCE_DIR})
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
-include(${CONAN_COMMONQTCMAKE_ROOT}/common-qt.cmake)
+find_file(QtCmake common-qt.cmake)
+include(${QtCmake})
 
 set_qt5_modules(Core)
 

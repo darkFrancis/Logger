@@ -1,9 +1,21 @@
 # Logger
 > Basic logging library (Qt based)
-<br/>V0.1
+<br/>V0.4
 
 # Dependencies 
-Add Conan remote https://darkfrancis.jfrog.io/artifactory/api/conan/public-conan
+Qt v5.12.3
+Conan v1.42.1
+Other: Add Conan remote https://darkfrancis.jfrog.io/artifactory/api/conan/public-conan
+
+# Installation
+```bash
+cd path/to/Logger
+mkdir build
+cd build
+cmake ..
+make
+sudo cmake --install .
+```
 
 # Documentation
 See: [ProjectManager](https://github.com/darkFrancis/ProjectManager)

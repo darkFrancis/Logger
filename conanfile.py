@@ -2,7 +2,7 @@ from conans import ConanFile, CMake, tools
 
 class LoggerConan(ConanFile):
     name = "Logger"
-    version = "0.3"
+    version = "0.4"
     license = "Copyright Dark Francis 2021"
     author = "Dark Francis dark.francis.dod@gmail.com"
     url = "https://github.com/darkFrancis/Logger"
