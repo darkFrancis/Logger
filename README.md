@@ -5,7 +5,7 @@
 # Dependencies 
 Qt v5.12.3
 Conan v1.42.1
-Other: Add Conan remote https://darkfrancis.jfrog.io/artifactory/api/conan/public-conan
+Other: Add Conan remote https://darkfrancisdod.jfrog.io/artifactory/api/conan/public-conan
 
 # Installation
 ```bash
